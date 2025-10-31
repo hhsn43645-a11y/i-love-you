@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>رسالتنا</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin:0; font-family:'Cairo', sans-serif;
+      background:#e6e6fa; overflow:hidden;
+      display:flex; justify-content:center; align-items:center; height:100vh;
+      text-align:center;
+    }
+    .card {
+      background:#fff; padding:25px; border-radius:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.15);
+      width:90%; max-width:420px; position:relative; z-index:2;
+    }
+    h2 {
+      font-family:'Amiri', serif; color:#e75480; margin-bottom:20px;
+    }
+    #messageText {
+      font-size:18px; line-height:1.8; color:#333;
+      border-right:2px solid #e75480; white-space:pre-wrap;
+      min-height:100px;
+    }
+    button {
+      margin-top:20px; padding:12px 20px; border:none;
+      background:#e75480; color:#fff; border-radius:8px;
+      cursor:pointer; font-size:16px; font-weight:600;
+    }
+    button:hover { background:#c94f6a; }
+    /* قلوب الخلفية */
+    .floating {
+      position:absolute; font-size:26px; color:#e75480;
+      animation:float 12s linear infinite; opacity:0.6; z-index:1;
+    }
+    @keyframes float {
+      0%{ transform:translateY(100vh) scale(0.5); opacity:0; }
+      50%{ opacity:1; }
+      100%{ transform:translateY(-10vh) scale(1); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="bg"></div>
+
+  <div class="card">
+    <h2>💌 رسالتي ليك</h2>
+    <p id="messageText"></p>
+    <button onclick="nextPage()">التالي ➡️</button>
+  </div>
+
+  <script>
+    const text = "حبيبي ❤️\n\nأنا عملتلك الموقع ده مخصوص عشان أقولك قد إيه إنت غالي عليا.\nكل لحظة معاك هي ذكرى جميلة، وكل يوم بيوعدني إننا هنكمل سوا للأبد 💕";
+    let i = 0;
+    function typeWriter(){
+      if(i < text.length){
+        document.getElementById("messageText").textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
+      } else {
+        document.getElementById("messageText").style.borderRight="none";
+      }
+    }
+    typeWriter();
+
+    function nextPage(){
+      window.location.href = "memories.html";
+    }
+
+    // قلوب الخلفية
+    const bg = document.getElementById("bg");
+    const icons = ["💜","🎀"];
+    for(let i=0;i<20;i++){
+      const span = document.createElement("div");
+      span.className="floating";
+      span.style.right = Math.random()*100+"vw";
+      span.style.animationDuration = (8+Math.random()*8)+"s";
+      span.textContent = icons[Math.floor(Math.random()*icons.length)];
+      bg.appendChild(span);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>ذكرياتنا</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Amiri', serif;
+      text-align: center;
+      color: #fff;
+      background: #ffdde1;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      margin: 20px 0;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* المستطيل للفيديو */
+    .video-frame {
+      margin: 20px auto;
+      width: 250px;
+      height: 150px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* السلايدر */
+    .slider {
+      position: relative;
+      max-width: 500px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 500px;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* زرار آخر صفحة */
+    .next-page {
+      display: inline-block;
+      margin: 30px auto;
+      padding: 12px 25px;
+      background: #ff4d6d;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.2em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+
+    .next-page:hover {
+      background: #e63950;
+    }
+
+    /* القلوب */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 2rem;
+      animation: floatUp linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>ذكرياتنا</h1>
+
+  <!-- المستطيل بالفيديو -->
+  <div class="video-frame">
+    <iframe 
+      src="https://www.youtube.com/embed/fGFB29lQ-Vs?autoplay=1&loop=1&playlist=fGFB29lQ-Vs"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- السلايدر -->
+  <div class="slider">
+    <div class="slides">
+      <!-- صور من الإنترنت -->
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800" alt="صورة 1">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800" alt="صورة 2">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800" alt="صورة 3">
+    </div>
+    <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+
+  <!-- زرار آخر صفحة -->
+  <a href="forever.html" class="next-page">إلى آخر صفحة ➝</a>
+
+  <script>
+    // السلايدر
+    let currentIndex = 0;
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slides img').length;
+
+    function moveSlide(direction) {
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * 500}px)`;
+    }
+
+    // القلوب
+    const emojis = ["💖","🎀","💝","💕","💓"];
+    for(let i=0; i<30; i++){
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+      heart.style.left = Math.random()*100 + "vw";
+      heart.style.animationDuration = (5 + Math.random()*10) + "s";
+      heart.style.fontSize = (20 + Math.random()*30) + "px";
+      document.body.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
